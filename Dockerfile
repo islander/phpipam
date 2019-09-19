@@ -22,13 +22,6 @@ RUN locale-gen ru_RU.UTF-8 && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=ru_RU.UTF-8
 
-# Install required packages and files required for snmp
-RUN mkdir -p /var/lib/mibs/ietf && \
-    curl -s ftp://ftp.cisco.com/pub/mibs/v2/CISCO-SMI.my -o /var/lib/mibs/ietf/CISCO-SMI.txt && \
-    curl -s ftp://ftp.cisco.com/pub/mibs/v2/CISCO-TC.my -o /var/lib/mibs/ietf/CISCO-TC.txt && \
-    curl -s ftp://ftp.cisco.com/pub/mibs/v2/CISCO-VTP-MIB.my -o /var/lib/mibs/ietf/CISCO-VTP-MIB.txt && \
-    curl -s ftp://ftp.cisco.com/pub/mibs/v2/MPLS-VPN-MIB.my -o /var/lib/mibs/ietf/MPLS-VPN-MIB.txt
-
 # Configure apache and required PHP modules
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
