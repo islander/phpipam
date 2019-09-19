@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  ipam:
+    image: kiba/phpipam:1.4ru
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+    env_file:
+      - mysql.env
+    logging:
+      driver: journald
+      options:
+        tag: "{{.ImageName}}/{{.Name}}/{{.ID}}"
+    ports:
+      - "127.0.0.1:6080:80"
