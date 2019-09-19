@@ -72,4 +72,7 @@ RUN cp ${WEB_REPO}/config.dist.php ${WEB_REPO}/config.php && \
     -e "s/\$gmaps_api_geocode_key.*/\$gmaps_api_geocode_key = getenv(\"GMAPS_API_GEOCODE_KEY\") ?: \"\";/" \
     ${WEB_REPO}/config.php
 
+# Remove debug output (v1.4 only)
+RUN sed -i '/var_dump/d' /var/www/html/app/footer.php
+
 EXPOSE 80
